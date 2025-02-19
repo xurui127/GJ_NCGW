@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,34 +24,96 @@ public class GameManager : MonoBehaviour
 
     private bool isWarping = false;
     private bool isFinishingWarp = false;
-    private float warpSpeed = 50f;
+    [SerializeField] private float warpSpeed = 50f;
     private float deceleration = 5f;
 
+    private float rotationSpeed = 1f;
+    private float rotationThreshold = 0.1f;
+    private bool isRotating = false;
+
+
+    private float currentSpeed = 0f;
+    [SerializeField] private float maxWarpSpeed = 80f;
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float declerationDistance = 150f;
 
     private void Update()
     {
+        if (isRotating)
+        {
+            RotateTowardsTarget();
+        }
+
         if (isWarping)
         {
-            ship.position += ship.forward * warpSpeed * Time.deltaTime;
 
-            if (newPlanet != null && Vector3.Distance(ship.position, newPlanet.position) < 100f)
-            {
-                StartCoroutine(FinishWarp());
-            }
+            MoveTowardsTarget();
         }
     }
 
+    private void MoveTowardsTarget()
+    {
+        if (newPlanet == null) return;
+
+        Vector3 directionToPlanet = (newPlanet.position - ship.position).normalized;
+
+        Vector3 targetStopPosition = newPlanet.position - (directionToPlanet * 100f);
+
+
+        float distanceToTarget = Vector3.Distance(ship.position, targetStopPosition);
+
+        if (currentSpeed < maxWarpSpeed)
+        {
+            currentSpeed += acceleration * Time.deltaTime;
+        }
+        if (distanceToTarget < declerationDistance)
+        {
+            float slowFactor = distanceToTarget / declerationDistance;
+            currentSpeed = Mathf.Lerp(5f,maxWarpSpeed,slowFactor);
+        }
+        ship.position = Vector3.MoveTowards(ship.position, targetStopPosition, currentSpeed * Time.deltaTime);
+
+        if (distanceToTarget < 100f)
+        {
+            StartCoroutine(FinishWarp());
+        }
+    }
+    private void RotateTowardsTarget()
+    {
+        if (newPlanet == null) return;
+
+        Vector3 directionToPlanet = (newPlanet.position - ship.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlanet);
+
+        ship.rotation = Quaternion.Slerp(ship.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        float angleDifference = Quaternion.Angle(ship.rotation, targetRotation);
+        if (angleDifference < rotationThreshold)
+        {
+            isRotating = false;
+            isWarping = true;
+        }
+    }
     public void OnWrapButtonClick()
     {
-        if (isWarping) return;
+        if (isWarping || isRotating) return;
 
-        isWarping = true;
+        isRotating = true;
+        currentSpeed = 0f;
 
-        var predictedPosition = ship.position + (ship.forward * (targetDistance + warpSpeed * 2f));
-        newPlanet = Instantiate(planetsPrefabs[RandomPlanet()], predictedPosition, Quaternion.identity).transform;
+        var predictedPosition = ship.position + (ship.forward * (targetDistance + maxWarpSpeed * 2));
 
+        float randomX = Random.Range(-targetDistance, targetDistance);
+        float randomY = Random.Range(-targetDistance, targetDistance);
+        float randomZ = Random.Range(-targetDistance, targetDistance);
+
+        var finalPosition = predictedPosition + (ship.right * randomX) + (ship.up * randomY) + (ship.forward * randomZ);
+
+        newPlanet = Instantiate(planetsPrefabs[RandomPlanet()], finalPosition, Quaternion.identity).transform;
         newPlanet.gameObject.SetActive(true);
-        //StartCoroutine(WarpSequence());
+
+        StartCoroutine(WarpSequence());
+        isWarping = true;
     }
 
     private int RandomPlanet()
@@ -61,26 +123,24 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WarpSequence()
     {
+        Vector3 directionToPlanet = (newPlanet.position - ship.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlanet);
+        ship.rotation = Quaternion.RotateTowards(ship.rotation, targetRotation, rotationSpeed * 50f * Time.deltaTime);
         yield return new WaitForSeconds(2f);
-
-        if (newPlanet != null)
-        {
-            newPlanet.gameObject.SetActive(true);
-        }
-        //warpEffect.gameObject.SetActive(false);
     }
 
     private IEnumerator FinishWarp()
     {
         if (isFinishingWarp) yield break;
         isFinishingWarp = true;
-        while (warpSpeed > 0)
+        while (currentSpeed > 0)
         {
-            warpSpeed -= deceleration * Time.deltaTime;
+            currentSpeed -= deceleration * Time.deltaTime;
             yield return null;
         }
 
-        warpSpeed = 0;
+        currentSpeed = 0;
+
         isWarping = false;
 
         if (currentPlanet != null)

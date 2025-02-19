@@ -660,7 +660,11 @@ MonoBehaviour:
   - {fileID: 7433427905713148169, guid: c931bb2ca8811214bb7cfe45aed2b8d0, type: 3}
   - {fileID: 7690958152634077339, guid: 4f2f103d41709264fb9f0c8929cf4259, type: 3}
   - {fileID: 4537235612474608506, guid: 0cd77863a125acd42b3dceb742d5898e, type: 3}
-  targetDistance: 200
+  targetDistance: 2000
+  warpSpeed: 80
+  maxWarpSpeed: 200
+  acceleration: 15
+  declerationDistance: 150
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
