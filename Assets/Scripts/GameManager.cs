@@ -37,6 +37,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float acceleration = 10f;
     [SerializeField] private float declerationDistance = 150f;
 
+    [SerializeField] private float shakeAmount = 0.5f;
+    [SerializeField] private float shakeSpeed = 5f;
+
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private float cameraShakeAmount = 0.5f;
+    [SerializeField] private float cameraShakeSpeed = 5f;
+    private Vector3 originalCameraPosition;
+
+    private float noiseOffsetX;
+    private float noiseOffsetY;
+
+    private void Start()
+    {
+        if (cameraTransform != null)
+        {
+            originalCameraPosition = cameraTransform.localPosition;
+        }
+    }
     private void Update()
     {
         if (isRotating)
@@ -56,10 +74,15 @@ public class GameManager : MonoBehaviour
         if (newPlanet == null) return;
 
         Vector3 directionToPlanet = (newPlanet.position - ship.position).normalized;
-
         Vector3 targetStopPosition = newPlanet.position - (directionToPlanet * 100f);
 
+        // Ship shake 
+        float dynamicShakeAmount = Mathf.Lerp(0f, shakeAmount, currentSpeed / maxWarpSpeed);
+        float shakeX = (Mathf.PerlinNoise(Time.time * shakeSpeed + noiseOffsetX, 0) - 0.5f) * dynamicShakeAmount;
+        float shakeY = (Mathf.PerlinNoise(0, Time.time * shakeSpeed + noiseOffsetY) - 0.5f) * dynamicShakeAmount;
+        Vector3 shakeOffset = ship.right * shakeX + ship.up * shakeY;
 
+        ApplyCameraShake();
         float distanceToTarget = Vector3.Distance(ship.position, targetStopPosition);
 
         if (currentSpeed < maxWarpSpeed)
@@ -69,13 +92,16 @@ public class GameManager : MonoBehaviour
         if (distanceToTarget < declerationDistance)
         {
             float slowFactor = distanceToTarget / declerationDistance;
-            currentSpeed = Mathf.Lerp(5f,maxWarpSpeed,slowFactor);
+            currentSpeed = Mathf.Lerp(5f, maxWarpSpeed, slowFactor);
         }
-        ship.position = Vector3.MoveTowards(ship.position, targetStopPosition, currentSpeed * Time.deltaTime);
+
+        ship.position = Vector3.MoveTowards(ship.position, targetStopPosition, currentSpeed * Time.deltaTime) + shakeOffset;
 
         if (distanceToTarget < 100f)
         {
             StartCoroutine(FinishWarp());
+            noiseOffsetX = 0;
+            noiseOffsetY = 0;
         }
     }
     private void RotateTowardsTarget()
@@ -101,6 +127,10 @@ public class GameManager : MonoBehaviour
         isRotating = true;
         currentSpeed = 0f;
 
+        noiseOffsetX = Random.Range(0, 100f);
+        noiseOffsetY = Random.Range(0, 100f);
+
+
         var predictedPosition = ship.position + (ship.forward * (targetDistance + maxWarpSpeed * 2));
 
         float randomX = Random.Range(-targetDistance, targetDistance);
@@ -113,7 +143,6 @@ public class GameManager : MonoBehaviour
         newPlanet.gameObject.SetActive(true);
 
         StartCoroutine(WarpSequence());
-        isWarping = true;
     }
 
     private int RandomPlanet()
@@ -125,9 +154,16 @@ public class GameManager : MonoBehaviour
     {
         Vector3 directionToPlanet = (newPlanet.position - ship.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlanet);
-        ship.rotation = Quaternion.RotateTowards(ship.rotation, targetRotation, rotationSpeed * 50f * Time.deltaTime);
+
+        while (Quaternion.Angle(ship.rotation, targetRotation) > rotationThreshold)
+        {
+            ship.rotation = Quaternion.RotateTowards(ship.rotation, targetRotation, rotationSpeed * 50f * Time.deltaTime);
+            yield return null;
+        }
         yield return new WaitForSeconds(2f);
+        isWarping = true;
     }
+
 
     private IEnumerator FinishWarp()
     {
@@ -153,5 +189,16 @@ public class GameManager : MonoBehaviour
             currentPlanet = newPlanet;
         }
         isFinishingWarp = false;
+    }
+    private void ApplyCameraShake()
+    {
+        if (cameraTransform == null) return;
+
+        float dynamicCameraShake = Mathf.Lerp(0f, cameraShakeAmount, currentSpeed / maxWarpSpeed);
+
+        float shakeX = (Mathf.PerlinNoise(Time.time * cameraShakeSpeed, 0) - 0.5f) * dynamicCameraShake;
+        float shakeY = (Mathf.PerlinNoise(0, Time.time * cameraShakeSpeed) - 0.5f) * dynamicCameraShake;
+
+        cameraTransform.localPosition = originalCameraPosition + new Vector3(shakeX, shakeY, 0);
     }
 }
