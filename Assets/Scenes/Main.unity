@@ -277,7 +277,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wrap
+  m_text: 'Warp
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -665,6 +667,11 @@ MonoBehaviour:
   maxWarpSpeed: 200
   acceleration: 15
   declerationDistance: 150
+  shakeAmount: 0.2
+  shakeSpeed: 5
+  cameraTransform: {fileID: 330585546}
+  cameraShakeAmount: 0.5
+  cameraShakeSpeed: 5
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
