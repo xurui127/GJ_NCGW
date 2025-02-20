@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum PlanetType
 {
-    Normal = 0,
+    EarthLike = 0,
     Frozen = 1,
     Lava = 2,
     Venom = 3,
@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     private Transform currentPlanet;
     private Transform newPlanet;
+
+    private PlanetStatus currentStatus;
+    private PlanetStatus newStatus;
 
     private bool isWarping = false;
     private bool isFinishingWarp = false;
@@ -155,7 +158,10 @@ public class GameManager : MonoBehaviour
 
         var finalPosition = predictedPosition + (ship.right * randomX) + (ship.up * randomY) + (ship.forward * randomZ);
 
-        newPlanet = Instantiate(planetsPrefabs[RandomPlanet()], finalPosition, Quaternion.identity).transform;
+        var tempPlanet = PlanetStatus.GenerateRandomPlanet();
+        var type = tempPlanet.GetPlanetTypy();
+        var planetPrefab = planetsPrefabs[(int)type];
+        newPlanet = Instantiate(planetPrefab, finalPosition, Quaternion.identity).transform;
         newPlanet.gameObject.SetActive(true);
 
         StartCoroutine(WarpSequence());
