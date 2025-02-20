@@ -162,8 +162,11 @@ public class GameManager : MonoBehaviour
         var type = tempPlanet.GetPlanetTypy();
         var planetPrefab = planetsPrefabs[(int)type];
         newPlanet = Instantiate(planetPrefab, finalPosition, Quaternion.identity).transform;
-        newPlanet.gameObject.SetActive(true);
 
+        var display = newPlanet.gameObject.GetComponent<PlanetInfoDisplay>();
+        display.SetPlanetData(tempPlanet);
+
+        newPlanet.gameObject.SetActive(true);
         StartCoroutine(WarpSequence());
     }
 
