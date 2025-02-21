@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -42,7 +41,7 @@ public class PlanetStatus
         float energy = UnityEngine.Random.Range(0f, 1f);
 
         float realHabitability = Mathf.Clamp01((water * 0.4f) + (energy * 0.3f) - (UnityEngine.Random.value < 0.5f ? 0.5f : 0f));
-        float fakeHabitability = Mathf.Clamp01(realHabitability + UnityEngine.Random.Range(-0.4f, 0.4f));
+        float fakeHabitability = Mathf.Clamp01(realHabitability + UnityEngine.Random.Range(-0.2f, 1f));
         bool hazards = UnityEngine.Random.value < 0.5f;
 
         return new PlanetStatus(name, type, fakeTemp, realTemp, water, energy, fakeHabitability, realHabitability, hazards);

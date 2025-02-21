@@ -98,4 +98,14 @@ public class PlanetInfoDisplay : MonoBehaviour
         displayPanel.SetActive(true);
         DisplayUI();
     }
+
+    public void LandShip()
+    {
+
+    }
+
+    public void ClosePlane()
+    {
+        displayPanel.SetActive(false);
+    }
 }

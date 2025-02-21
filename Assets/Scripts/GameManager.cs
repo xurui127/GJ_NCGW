@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    [SerializeField] private UIManager ui;
     [SerializeField] private Transform ship;
     [SerializeField] private GameObject warpEffect;
     [SerializeField] private List<GameObject> planetsPrefabs;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] ParticleSystem effect1;
     [SerializeField] ParticleSystem effect2;
 
-    private ShipStatus shipStatus;
+    public ShipStatus shipStatus;
 
     private void Awake()
     {
@@ -84,6 +86,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        shipStatus = new ShipStatus(100, 100, 0);
     }
     private void Start()
     {
@@ -92,7 +95,10 @@ public class GameManager : MonoBehaviour
             originalCameraPosition = cameraTransform.localPosition;
         }
 
-        shipStatus = new ShipStatus(100, 100, 0);
+   
+        //shipStatus.OnPopulationChanged += UpdatePopulation;
+        //shipStatus.OnMalfunctionsChanged += UpdateMalfunctions;
+
 
     }
     private void Update()
@@ -107,6 +113,7 @@ public class GameManager : MonoBehaviour
 
             MoveTowardsTarget();
         }
+
     }
 
     private void MoveTowardsTarget()
@@ -129,6 +136,8 @@ public class GameManager : MonoBehaviour
         UpdateEffects(effect1);
         UpdateEffects(effect2);
 
+
+        
         if (effect2 != null)
         {
             effect2.gameObject.SetActive(true);
@@ -169,11 +178,20 @@ public class GameManager : MonoBehaviour
         {
             isRotating = false;
             isWarping = true;
+            var energyCost = Random.Range(10, 15);
+            StartCoroutine(ConsumeEnergyOverTime(energyCost));
         }
     }
     public void OnWrapButtonClick()
     {
         if (isWarping || isRotating) return;
+
+        if (currentPlanet != null)
+        {
+            currentPlanet.gameObject.GetComponent<PlanetInfoDisplay>().ClosePlane();
+        }
+
+        
 
         isRotating = true;
         currentSpeed = 0f;
@@ -290,5 +308,20 @@ public class GameManager : MonoBehaviour
         emission.rateOverTime = Mathf.Lerp(10f, 120f, currentSpeed / maxWarpSpeed);
 
         main.startLifetime = Mathf.Lerp(1.5f, 2f, currentSpeed / maxWarpSpeed);
+    }
+    private IEnumerator ConsumeEnergyOverTime(float totalEnergyToLose)
+    {
+        float energyLost = 0f;
+
+        while (isWarping && energyLost < totalEnergyToLose && shipStatus.Energy > 0)
+        {
+            float speedFactor = Mathf.Max(0.1f, currentSpeed / maxWarpSpeed);
+            float energyLossPerStep = 1f;
+            shipStatus.Energy -= energyLossPerStep; 
+            energyLost += energyLossPerStep;
+
+            float waitTime = Mathf.Lerp(1.2f, 1.8f, speedFactor);
+            yield return new WaitForSeconds(waitTime);
+        }
     }
 }
