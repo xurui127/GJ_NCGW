@@ -45,6 +45,11 @@ public class PlanetInfoDisplay : MonoBehaviour
         water.text = $"Water: {(planetData.waterLevel * 100).ToString("F1")}%";
         energy.text = $"Energy: {(planetData.energyLevel * 100).ToString("F1")}%";
         habi.text = $"Habitability: {(planetData.habitability * 100).ToString("F1")}%";
+        Debug.Log($"Temp: {planetData.realTemp}");
+        Debug.Log($"Real Habi: {planetData.realHabitability}");
+        Debug.Log($"hasHazard: {planetData.hasHazard}");
+        
+
     }
 
 
@@ -53,7 +58,7 @@ public class PlanetInfoDisplay : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask) && !GameManager.Instance.isWarping)
         {
             if (isScanned) return;
 

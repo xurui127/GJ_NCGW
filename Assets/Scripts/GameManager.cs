@@ -13,6 +13,24 @@ public enum PlanetType
 }
 public class GameManager : MonoBehaviour
 {
+
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindAnyObjectByType<GameManager>();
+            }
+            if (instance == null)
+            {
+                GameObject obj = new("GameManager");
+                instance = obj.AddComponent<GameManager>();
+            }
+            return instance;
+        }
+    }
     [SerializeField] private Transform ship;
     [SerializeField] private GameObject warpEffect;
     [SerializeField] private List<GameObject> planetsPrefabs;
@@ -25,7 +43,7 @@ public class GameManager : MonoBehaviour
     private PlanetStatus currentStatus;
     private PlanetStatus newStatus;
 
-    private bool isWarping = false;
+    public bool isWarping = false;
     private bool isFinishingWarp = false;
     private float deceleration = 10f;
 
@@ -54,13 +72,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] ParticleSystem effect1;
     [SerializeField] ParticleSystem effect2;
 
+    private ShipStatus shipStatus;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         if (cameraTransform != null)
         {
             originalCameraPosition = cameraTransform.localPosition;
         }
+
+        shipStatus = new ShipStatus(100, 100, 0);
 
     }
     private void Update()
