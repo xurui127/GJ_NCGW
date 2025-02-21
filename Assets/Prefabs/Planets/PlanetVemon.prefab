@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4978781976178834029}
   - component: {fileID: 7291186645230831863}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: DisPlayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -36.68525}
+  m_AnchoredPosition: {x: 86, y: -41}
   m_SizeDelta: {x: 146.05, y: 33.2069}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1792633774197083190
@@ -616,9 +616,9 @@ RectTransform:
   - {fileID: 5913252631883488171}
   m_Father: {fileID: 6333398488426681990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -66.1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 75, y: 50}
   m_SizeDelta: {x: 134.5, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979743009191738311
@@ -1008,7 +1008,13 @@ MonoBehaviour:
   water: {fileID: 2126168939971352275}
   energy: {fileID: 1342982909114774217}
   habi: {fileID: 6435027738703571892}
-  progressBar: {fileID: 0}
+  displayPanel: {fileID: 513125039420992330}
+  progressPanel: {fileID: 7500698134504042166}
+  progressBar: {fileID: 1979743009191738311}
+  fillSpeed: 0.2
+  maxFillSpeed: 0.4
+  delayMin: 0.05
+  delayMax: 0.15
 --- !u!1 &5577182209294751742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1197,7 @@ GameObject:
   - component: {fileID: 5027107490129244272}
   - component: {fileID: 6182371937937260956}
   m_Layer: 0
-  m_Name: Panel (1)
+  m_Name: ProgressPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1272,7 +1278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8434871914084362633
 RectTransform:
   m_ObjectHideFlags: 0

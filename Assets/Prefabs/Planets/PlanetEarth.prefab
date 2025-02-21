@@ -110,7 +110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -82, y: 54}
+  m_AnchoredPosition: {x: 72, y: 46}
   m_SizeDelta: {x: 134.5, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3924230879116345298
@@ -275,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -79.85881}
+  m_AnchoredPosition: {x: 80.066315, y: -79.85881}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8059230871997963255
@@ -409,7 +409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -48.87529}
+  m_AnchoredPosition: {x: 80.066315, y: -48.87529}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2767113122302703866
@@ -525,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4304558214811484738
 RectTransform:
   m_ObjectHideFlags: 0
@@ -604,7 +604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -110.84233}
+  m_AnchoredPosition: {x: 80.066315, y: -110.84233}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6154812573940511087
@@ -774,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -52.933685, y: -17.891762}
+  m_AnchoredPosition: {x: 80.066315, y: -17.891762}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3265943989483778364
@@ -1210,7 +1210,13 @@ MonoBehaviour:
   water: {fileID: 6918478555781191328}
   energy: {fileID: 4454663416679283035}
   habi: {fileID: 4489723289343079888}
-  progressBar: {fileID: 0}
+  displayPanel: {fileID: 8824129357919240696}
+  progressPanel: {fileID: 2246311061711779545}
+  progressBar: {fileID: 3924230879116345298}
+  fillSpeed: 0.2
+  maxFillSpeed: 0.4
+  delayMin: 0.05
+  delayMax: 0.15
 --- !u!1 &8824129357919240696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1230,7 @@ GameObject:
   - component: {fileID: 981441083116473307}
   - component: {fileID: 8891239772454177124}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: DisplayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
