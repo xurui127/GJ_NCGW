@@ -25,6 +25,7 @@ public class PlanetStatus
         this.habitability = habitability;
         this.realHabitability = realHabitability;
         this.hasHazard = hasHazard;
+
     }
 
     public static PlanetStatus GenerateRandomPlanet()
@@ -52,4 +53,6 @@ public class PlanetStatus
     {
         return planetType;
     }
+
+    
 }

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8732492936731101862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 152308464715185246}
+  - component: {fileID: 2741288997450424204}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &152308464715185246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732492936731101862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2741288997450424204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732492936731101862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d115c121f24674f9cce280ea0f4458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  ship: {fileID: 0}
+  warpEffect: {fileID: 8803372402427376097, guid: dbdab8454e9593f45bbf8a7f8e059607,
+    type: 3}
+  planetsPrefabs:
+  - {fileID: 8773231378686058879, guid: aa07aac63c30b684db2e668bdc634db6, type: 3}
+  - {fileID: 8484198216258192609, guid: e0dce144c1658f04ca35de0286868aaf, type: 3}
+  - {fileID: 7433427905713148169, guid: c931bb2ca8811214bb7cfe45aed2b8d0, type: 3}
+  - {fileID: 4337265477073353871, guid: d18eda4f95420f74e8a89031711f0d51, type: 3}
+  - {fileID: 7690958152634077339, guid: 4f2f103d41709264fb9f0c8929cf4259, type: 3}
+  targetDistance: 2000
+  isWarping: 0
+  currentSpeed: 0
+  maxWarpSpeed: 200
+  acceleration: 15
+  declerationDistance: 150
+  shakeAmount: 0.2
+  shakeSpeed: 5
+  cameraTransform: {fileID: 0}
+  cameraShakeAmount: 0.5
+  cameraShakeSpeed: 5
+  effect1: {fileID: 0}
+  effect2: {fileID: 0}

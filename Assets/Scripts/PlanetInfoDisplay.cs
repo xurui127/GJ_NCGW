@@ -3,6 +3,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class PlanetInfoDisplay : MonoBehaviour
 {
@@ -21,12 +23,14 @@ public class PlanetInfoDisplay : MonoBehaviour
     private bool isScanned = false;
 
 
-    [SerializeField] private Slider progressBar;
+    [SerializeField] private UnityEngine.UI.Slider progressBar;
     [SerializeField] private float fillSpeed = 0.03f;
     [SerializeField] private float maxFillSpeed = 0.1f;
     [SerializeField] private float delayMin = 1f;
     [SerializeField] private float delayMax = 2f;
     private float targetValue = 1f;
+
+    [SerializeField] public Button landButton;
 
     private void Update()
     {
@@ -65,6 +69,7 @@ public class PlanetInfoDisplay : MonoBehaviour
             if (!isScanned)
             {
                 displayPanel.gameObject.SetActive(true);
+               
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -99,13 +104,18 @@ public class PlanetInfoDisplay : MonoBehaviour
         DisplayUI();
     }
 
-    public void LandShip()
-    {
-
-    }
 
     public void ClosePlane()
     {
         displayPanel.SetActive(false);
     }
+    public void OpenPlane()
+    {
+        displayPanel.SetActive(true);
+    }
+    public void CloseLandButton()
+    {
+       landButton.transform.gameObject.SetActive(false);
+    }
+
 }

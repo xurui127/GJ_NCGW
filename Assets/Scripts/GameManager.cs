@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 
 public enum PlanetType
@@ -214,15 +216,14 @@ public class GameManager : MonoBehaviour
         newPlanet = Instantiate(planetPrefab, finalPosition, Quaternion.identity).transform;
 
         var display = newPlanet.gameObject.GetComponent<PlanetInfoDisplay>();
+      
+
         display.SetPlanetData(tempPlanet);
 
+        display.landButton.onClick.AddListener(() => ConsumePopuAndMalf());
+        display.landButton.onClick.AddListener(() => display.CloseLandButton());
         newPlanet.gameObject.SetActive(true);
         StartCoroutine(WarpSequence());
-    }
-
-    private int RandomPlanet()
-    {
-        return Random.Range(0, planetsPrefabs.Count);
     }
 
     private IEnumerator WarpSequence()
@@ -323,5 +324,14 @@ public class GameManager : MonoBehaviour
             float waitTime = Mathf.Lerp(1.2f, 1.8f, speedFactor);
             yield return new WaitForSeconds(waitTime);
         }
+    }
+
+    public void ConsumePopuAndMalf()
+    {
+        var popuCost = Random.Range(10, 50);
+        var malfCost = Random.Range(10, 50);
+
+        shipStatus.Population -= popuCost;
+        shipStatus.Malfunctions -= malfCost;
     }
 }

@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -116.068886}
+  m_AnchoredPosition: {x: 40, y: -140.06888}
   m_SizeDelta: {x: 80, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6919216612600974570
@@ -191,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.61545, y: -35.91432}
+  m_AnchoredPosition: {x: 84.61545, y: -41.91432}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &243715579499197638
@@ -526,6 +526,8 @@ GameObject:
   - component: {fileID: 5626671922790196368}
   - component: {fileID: 4373583567384041205}
   - component: {fileID: 8124351931829691370}
+  - component: {fileID: 2260522550606426086}
+  - component: {fileID: 7895370695639111054}
   m_Layer: 0
   m_Name: DisplayPanel
   m_TagString: Untagged
@@ -613,7 +615,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: -4.8
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -621,6 +623,46 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!223 &2260522550606426086
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223859794148956470}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &7895370695639111054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223859794148956470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5208535994468506154
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.61545, y: -87.69877}
+  m_AnchoredPosition: {x: 84.61545, y: -105.69877}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5131585950700088381
@@ -1057,7 +1099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 84.61545, y: -61.80655}
+  m_AnchoredPosition: {x: 84.61545, y: -73.80655}
   m_SizeDelta: {x: 169.2309, y: 20.0442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3200955741123623836
@@ -1167,6 +1209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7056565831130850491}
   - component: {fileID: 6018312822343542289}
+  - component: {fileID: 8345933768154367486}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1218,6 +1261,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &8345933768154367486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6840967431398535353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &6976376930463728048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1564,7 @@ MonoBehaviour:
   maxFillSpeed: 0.4
   delayMin: 0.05
   delayMax: 0.15
+  landButton: {fileID: 8199553149875490730}
 --- !u!1 &8041140441582045446
 GameObject:
   m_ObjectHideFlags: 0
