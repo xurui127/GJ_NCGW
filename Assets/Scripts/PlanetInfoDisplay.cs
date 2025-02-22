@@ -2,8 +2,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public class PlanetInfoDisplay : MonoBehaviour
@@ -52,7 +50,7 @@ public class PlanetInfoDisplay : MonoBehaviour
         Debug.Log($"Temp: {planetData.realTemp}");
         Debug.Log($"Real Habi: {planetData.realHabitability}");
         Debug.Log($"hasHazard: {planetData.hasHazard}");
-        
+
 
     }
 
@@ -69,7 +67,7 @@ public class PlanetInfoDisplay : MonoBehaviour
             if (!isScanned)
             {
                 displayPanel.gameObject.SetActive(true);
-               
+
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -115,7 +113,7 @@ public class PlanetInfoDisplay : MonoBehaviour
     }
     public void CloseLandButton()
     {
-       landButton.transform.gameObject.SetActive(false);
+        landButton.transform.gameObject.SetActive(false);
     }
 
 }

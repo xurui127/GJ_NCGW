@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
 
 
 public enum PlanetType
@@ -98,7 +96,7 @@ public class GameManager : MonoBehaviour
             originalCameraPosition = cameraTransform.localPosition;
         }
 
-   
+
         //shipStatus.OnPopulationChanged += UpdatePopulation;
         //shipStatus.OnMalfunctionsChanged += UpdateMalfunctions;
 
@@ -155,7 +153,7 @@ public class GameManager : MonoBehaviour
         UpdateEffects(effect2);
 
 
-        
+
         if (effect2 != null)
         {
             effect2.gameObject.SetActive(true);
@@ -233,7 +231,7 @@ public class GameManager : MonoBehaviour
         newPlanet = Instantiate(planetPrefab, finalPosition, Quaternion.identity).transform;
 
         var display = newPlanet.gameObject.GetComponent<PlanetInfoDisplay>();
-      
+
 
         display.SetPlanetData(tempPlanet);
 
@@ -335,7 +333,7 @@ public class GameManager : MonoBehaviour
         {
             float speedFactor = Mathf.Max(0.1f, currentSpeed / maxWarpSpeed);
             float energyLossPerStep = 1f;
-            shipStatus.Energy -= energyLossPerStep; 
+            shipStatus.Energy -= energyLossPerStep;
             energyLost += energyLossPerStep;
 
             float waitTime = Mathf.Lerp(1.2f, 1.8f, speedFactor);
@@ -362,6 +360,6 @@ public class GameManager : MonoBehaviour
             ui.StartFading();
             ui.SetMalfText();
         }
-        
+
     }
 }
