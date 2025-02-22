@@ -115,7 +115,22 @@ public class GameManager : MonoBehaviour
 
             MoveTowardsTarget();
         }
+        if (isWarping && shipStatus.Energy < 0)
+        {
+            ui.StartFading();
+            ui.SetEnergyText();
+        }
 
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    ui.StartFading();
+        //    ui.SetPopuText();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    ui.StartFading();
+        //    ui.SetMalfText();
+        //}
     }
 
     private void MoveTowardsTarget()
@@ -187,6 +202,7 @@ public class GameManager : MonoBehaviour
     public void OnWrapButtonClick()
     {
         if (isWarping || isRotating) return;
+
 
         if (currentPlanet != null)
         {
@@ -332,6 +348,19 @@ public class GameManager : MonoBehaviour
         var malfCost = Random.Range(10, 50);
 
         shipStatus.Population -= popuCost;
-        shipStatus.Malfunctions -= malfCost;
+        shipStatus.Malfunctions += malfCost;
+
+        if (shipStatus.Population < 0)
+        {
+            ui.StartFading();
+            ui.SetPopuText();
+
+        }
+        else if (shipStatus.Malfunctions >= 100)
+        {
+            ui.StartFading();
+            ui.SetMalfText();
+        }
+        
     }
 }
