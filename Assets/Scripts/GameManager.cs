@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private UIManager ui;
+    [SerializeField] private AudioManager am;
     [SerializeField] private Transform ship;
     [SerializeField] private GameObject warpEffect;
     [SerializeField] private List<GameObject> planetsPrefabs;
@@ -209,7 +210,7 @@ public class GameManager : MonoBehaviour
             currentPlanet.gameObject.GetComponent<PlanetInfoDisplay>().ClosePlane();
         }
 
-        
+        am.travel.Play();
 
         isRotating = true;
         currentSpeed = 0f;
